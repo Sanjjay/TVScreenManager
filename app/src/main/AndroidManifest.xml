@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://android.com"
+<manifest xmlns:android="http://android.com">
 
     <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
 
     <uses-feature android:name="android.software.leanback" android:required="false" />
     <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
 
-    <!-- CRITICAL: Allows the app to bypass Android 11+ Package Visibility constraints -->
     <queries>
         <intent>
             <action android:name="android.service.dreams.DreamService" />
