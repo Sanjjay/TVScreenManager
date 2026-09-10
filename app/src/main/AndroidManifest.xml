@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://android.com">
+
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS" />
+
+    <uses-feature android:name="android.software.leanback" android:required="false" />
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false" />
+
+    <queries>
+        <intent>
+            <action android:name="android.service.dreams.DreamService" />
+        </intent>
+    </queries>
+
+    <application
+        android:allowBackup="true"
+        android:label="TV Screensaver Manager"
+        android:theme="@style/Theme.Leanback">
+        
+        <activity
+            android:name="com.kscreensavermanager.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>
