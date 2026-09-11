@@ -41,7 +41,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Please run this exact command from your computer terminal to unlock the app:"
+            android:text="Please run this exact command from your computer ADB Terminal to grant permission:"
             android:textColor="#EEEEEE"
             android:textSize="14sp"
             android:layout_marginBottom="8dp" />
@@ -50,7 +50,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="adb shell pm grant com.screensavermanager android.permission.WRITE_SECURE_SETTINGS"
+            android:text="adb shell pm grant com.kscreensavermanager android.permission.WRITE_SECURE_SETTINGS"
             android:textColor="#FFFF00"
             android:fontFamily="monospace"
             android:background="#4A0000"
