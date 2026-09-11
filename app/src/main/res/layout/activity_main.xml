@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<LinearLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="24dp"
-    android:background="#121212">
+    android:background="#0D1B2A"> <!-- Deep Navy Blue Background -->
 
+    <!-- Title -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,7 +18,47 @@
         android:textStyle="bold"
         android:layout_marginBottom="16dp" />
 
-    <!-- TIMEOUT CONFIGURATIONS ROW -->
+    <!-- DYNAMIC ADB WARNING DIALOG CARD -->
+    <LinearLayout
+        android:id="@+id/adb_warning_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#C0392B" 
+        android:padding="16dp"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone"> <!-- Hidden by default, shown via Java if needed -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⚠️ SYSTEM PERMISSION REQUIRED"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please run this exact command from your computer terminal to unlock the app:"
+            android:textColor="#EEEEEE"
+            android:textSize="14sp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="adb shell pm grant com.screensavermanager android.permission.WRITE_SECURE_SETTINGS"
+            android:textColor="#FFFF00"
+            android:textStyle="monospace"
+            android:background="#4A0000"
+            android:padding="8dp"
+            android:textSize="13sp"
+            android:textIsSelectable="true"/>
+    </LinearLayout>
+
+    <!-- CONFIGURATIONS ROW -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +66,7 @@
         android:weightSum="2"
         android:layout_marginBottom="16dp">
 
-        <!-- Left Column: Screen Off / Screensaver Start -->
+        <!-- Screensaver Start Column -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -37,44 +78,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1. Screensaver Start Timeout"
-                android:textColor="#BBBBBB"
+                android:textColor="#E0E1DD"
                 android:textSize="16sp"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btn_off_5m"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="5m"
-                    android:layout_marginRight="4dp" />
-
-                <Button
-                    android:id="@+id/btn_off_15m"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="15m"
-                    android:layout_marginRight="4dp" />
-
-                <EditText
-                    android:id="@+id/et_off_custom"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:hint="Min"
-                    android:inputType="number"
-                    android:textColor="#FFFFFF"
-                    android:background="#222222"
-                    android:padding="8dp" />
-
+                <Button android:id="@+id/btn_off_5m" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="5m" android:layout_marginRight="4dp" android:backgroundTint="#1B263B" android:textColor="#FFFFFF"/>
+                <Button android:id="@+id/btn_off_15m" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="15m" android:layout_marginRight="4dp" android:backgroundTint="#1B263B" android:textColor="#FFFFFF"/>
+                <EditText android:id="@+id/et_off_custom" android:layout_width="60dp" android:layout_height="wrap_content" android:hint="Min" android:inputType="number" android:textColor="#FFFFFF" android:textColorHint="#A0A0A0" android:background="#1B263B" android:padding="8dp"/>
             </LinearLayout>
-
         </LinearLayout>
 
-        <!-- Right Column: Deep Sleep Timeout -->
+        <!-- Deep Sleep Column -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -86,43 +104,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2. System Sleep Timeout"
-                android:textColor="#BBBBBB"
+                android:textColor="#E0E1DD"
                 android:textSize="16sp"
-                android:layout_marginBottom="4dp" />
+                android:layout_marginBottom="4dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/btn_sleep_30m"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="30m"
-                    android:layout_marginRight="4dp" />
-
-                <Button
-                    android:id="@+id/btn_sleep_never"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Never"
-                    android:layout_marginRight="4dp" />
-
-                <EditText
-                    android:id="@+id/et_sleep_custom"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:hint="Min"
-                    android:inputType="number"
-                    android:textColor="#FFFFFF"
-                    android:background="#222222"
-                    android:padding="8dp" />
-
+                <Button android:id="@+id/btn_sleep_30m" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="30m" android:layout_marginRight="4dp" android:backgroundTint="#1B263B" android:textColor="#FFFFFF"/>
+                <Button android:id="@+id/btn_sleep_never" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Never" android:layout_marginRight="4dp" android:backgroundTint="#1B263B" android:textColor="#FFFFFF"/>
+                <EditText android:id="@+id/et_sleep_custom" android:layout_width="60dp" android:layout_height="wrap_content" android:hint="Min" android:inputType="number" android:textColor="#FFFFFF" android:textColorHint="#A0A0A0" android:background="#1B263B" android:padding="8dp"/>
             </LinearLayout>
-
         </LinearLayout>
-
     </LinearLayout>
 
     <Button
@@ -130,22 +124,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save Custom Timeouts"
-        android:layout_marginBottom="16dp" />
+        android:backgroundTint="#F39C12" <!-- Vibrant Accent Gold -->
+        android:textColor="#0D1B2A"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/>
 
     <!-- DAYDREAM SELECTOR -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="3. Detected Daydream Apps (Tick to Enable)"
-        android:textColor="#BBBBBB"
+        android:textColor="#E0E1DD"
         android:textSize="16sp"
-        android:layout_marginBottom="6dp" />
+        android:layout_marginBottom="6dp"/>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="#1A1A1A"
+        android:background="#1B263B" 
         android:padding="8dp">
 
         <RadioGroup
@@ -153,7 +150,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />
-
     </ScrollView>
 
 </LinearLayout>
