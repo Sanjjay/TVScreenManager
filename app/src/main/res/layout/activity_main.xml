@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://android.com"
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -23,7 +25,7 @@
         android:weightSum="2"
         android:layout_marginBottom="16dp">
 
-        <!-- Left Column: Screen Off (Screensaver trigger) -->
+        <!-- Left Column: Screen Off / Screensaver Start -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -37,16 +39,39 @@
                 android:text="1. Screensaver Start Timeout"
                 android:textColor="#BBBBBB"
                 android:textSize="16sp"
-                android:layout_marginBottom="4dp"/>
+                android:layout_marginBottom="4dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <Button android:id="@+id/btn_off_5m" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="5m" android:layout_marginRight="4dp"/>
-                <Button android:id="@+id/btn_off_15m" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="15m" android:layout_marginRight="4dp"/>
-                <EditText android:id="@+id/et_off_custom" android:layout_width="60dp" android:layout_height="wrap_content" android:hint="Min" android:inputType="number" android:textColor="#FFFFFF" android:background="#222222" android:padding="8dp"/>
+
+                <Button
+                    android:id="@+id/btn_off_5m"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5m"
+                    android:layout_marginRight="4dp" />
+
+                <Button
+                    android:id="@+id/btn_off_15m"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="15m"
+                    android:layout_marginRight="4dp" />
+
+                <EditText
+                    android:id="@+id/et_off_custom"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Min"
+                    android:inputType="number"
+                    android:textColor="#FFFFFF"
+                    android:background="#222222"
+                    android:padding="8dp" />
+
             </LinearLayout>
+
         </LinearLayout>
 
         <!-- Right Column: Deep Sleep Timeout -->
@@ -63,17 +88,41 @@
                 android:text="2. System Sleep Timeout"
                 android:textColor="#BBBBBB"
                 android:textSize="16sp"
-                android:layout_marginBottom="4dp"/>
+                android:layout_marginBottom="4dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-                <Button android:id="@+id/btn_sleep_30m" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="30m" android:layout_marginRight="4dp"/>
-                <Button android:id="@+id/btn_sleep_never" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Never" android:layout_marginRight="4dp"/>
-                <EditText android:id="@+id/et_sleep_custom" android:layout_width="60dp" android:layout_height="wrap_content" android:hint="Min" android:inputType="number" android:textColor="#FFFFFF" android:background="#222222" android:padding="8dp"/>
+
+                <Button
+                    android:id="@+id/btn_sleep_30m"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="30m"
+                    android:layout_marginRight="4dp" />
+
+                <Button
+                    android:id="@+id/btn_sleep_never"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Never"
+                    android:layout_marginRight="4dp" />
+
+                <EditText
+                    android:id="@+id/et_sleep_custom"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Min"
+                    android:inputType="number"
+                    android:textColor="#FFFFFF"
+                    android:background="#222222"
+                    android:padding="8dp" />
+
             </LinearLayout>
+
         </LinearLayout>
+
     </LinearLayout>
 
     <Button
@@ -81,7 +130,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save Custom Timeouts"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp" />
 
     <!-- DAYDREAM SELECTOR -->
     <TextView
@@ -90,7 +139,7 @@
         android:text="3. Detected Daydream Apps (Tick to Enable)"
         android:textColor="#BBBBBB"
         android:textSize="16sp"
-        android:layout_marginBottom="6dp"/>
+        android:layout_marginBottom="6dp" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -104,6 +153,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" />
+
     </ScrollView>
 
 </LinearLayout>
