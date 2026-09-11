@@ -6,8 +6,10 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -17,7 +19,9 @@ public class MainActivity extends Activity {
 
     private EditText etOffCustom, etSleepCustom;
     private RadioGroup rgDaydreamApps;
+    private LinearLayout adbWarningCard;
     private PackageManager packageManager;
+    private boolean hasSecurePermission = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,7 @@ public class MainActivity extends Activity {
         etOffCustom = findViewById(R.id.et_off_custom);
         etSleepCustom = findViewById(R.id.et_sleep_custom);
         rgDaydreamApps = findViewById(R.id.rg_daydream_apps);
+        adbWarningCard = findViewById(R.id.adb_warning_card);
 
         Button btnOff5m = findViewById(R.id.btn_off_5m);
         Button btnOff15m = findViewById(R.id.btn_off_15m);
@@ -36,14 +41,19 @@ public class MainActivity extends Activity {
         Button btnSleepNever = findViewById(R.id.btn_sleep_never);
         Button btnApplyTimeouts = findViewById(R.id.btn_apply_timeouts);
 
-        // Timers Presets (Minutes converted directly to Milliseconds)
+        // CHECK PERMISSION STATUS RIGHT AT THE START
+        checkAdbPermission();
+
         btnOff5m.setOnClickListener(v -> saveTimeouts(5 * 60 * 1000, -1));
         btnOff15m.setOnClickListener(v -> saveTimeouts(15 * 60 * 1000, -1));
         btnSleep30m.setOnClickListener(v -> saveTimeouts(-1, 30 * 60 * 1000));
         btnSleepNever.setOnClickListener(v -> saveTimeouts(-1, 2147483647)); 
 
-        // Apply typing fields
         btnApplyTimeouts.setOnClickListener(v -> {
+            if (!hasSecurePermission) {
+                showPermissionToast();
+                return;
+            }
             int offMs = -1;
             int sleepMs = -1;
             try {
@@ -59,11 +69,36 @@ public class MainActivity extends Activity {
             }
         });
 
-        // Scan and populate screen with compatible Daydream options
         discoverAndPopulateDaydreams();
     }
 
+    private void checkAdbPermission() {
+        try {
+            // Test if we can read the variable (standard permission check)
+            Settings.Secure.getString(getContentResolver(), "screensaver_components");
+            // Run a dummy write to guarantee we actually have edit rights
+            int currentVal = Settings.Secure.getInt(getContentResolver(), "screensaver_enabled", 1);
+            Settings.Secure.putInt(getContentResolver(), "screensaver_enabled", currentVal);
+            
+            // If we get here, permission is granted! Hide the card.
+            adbWarningCard.setVisibility(View.GONE);
+            hasSecurePermission = true;
+        } catch (SecurityException se) {
+            // Permission is NOT granted. Show the big red card with the command!
+            adbWarningCard.setVisibility(View.VISIBLE);
+            hasSecurePermission = false;
+        }
+    }
+
+    private void showPermissionToast() {
+        Toast.makeText(this, "ERROR: Run the ADB command shown at the top of the screen!", Toast.LENGTH_LONG).show();
+    }
+
     private void saveTimeouts(int offMs, int sleepMs) {
+        if (!hasSecurePermission) {
+            showPermissionToast();
+            return;
+        }
         try {
             if (offMs != -1) {
                 Settings.System.putInt(getContentResolver(), "screen_off_timeout", offMs);
@@ -73,17 +108,19 @@ public class MainActivity extends Activity {
                 Settings.Secure.putInt(getContentResolver(), "sleep_timeout", sleepMs);
             }
             Toast.makeText(this, "Timeout values saved!", Toast.LENGTH_SHORT).show();
-        } catch (SecurityException se) {
-            Toast.makeText(this, "Requires WRITE_SECURE_SETTINGS via ADB", Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Toast.makeText(this, "Failed to save settings", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void discoverAndPopulateDaydreams() {
-        // Query for services handling the base Dream Service Action
         Intent dreamIntent = new Intent("android.service.dreams.DreamService");
         List<ResolveInfo> resolveInfos = packageManager.queryIntentServices(dreamIntent, 0);
 
-        String currentActiveSaver = Settings.Secure.getString(getContentResolver(), "screensaver_components");
+        String currentActiveSaver = "";
+        if (hasSecurePermission) {
+            currentActiveSaver = Settings.Secure.getString(getContentResolver(), "screensaver_components");
+        }
 
         if (resolveInfos == null || resolveInfos.isEmpty()) {
             RadioButton rbNone = new RadioButton(this);
@@ -106,20 +143,23 @@ public class MainActivity extends Activity {
                 rb.setFocusable(true);
                 rb.setTag(fullComponent);
 
-                // Auto-tick if this app is already active in Android Core Settings
                 if (fullComponent.equals(currentActiveSaver)) {
                     rb.setChecked(true);
                 }
 
-                // Interaction listener: Ticking a checkbox immediately locks setting
                 rb.setOnCheckedChangeListener((buttonView, isChecked) -> {
                     if (isChecked) {
+                        if (!hasSecurePermission) {
+                            rb.setChecked(false);
+                            showPermissionToast();
+                            return;
+                        }
                         try {
                             Settings.Secure.putString(getContentResolver(), "screensaver_components", fullComponent);
                             Settings.Secure.putInt(getContentResolver(), "screensaver_enabled", 1);
                             Toast.makeText(MainActivity.this, "Set Active: " + appLabel, Toast.LENGTH_SHORT).show();
-                        } catch (SecurityException se) {
-                            Toast.makeText(MainActivity.this, "ADB secure settings bypass missing!", Toast.LENGTH_LONG).show();
+                        } catch (Exception e) {
+                            Toast.makeText(MainActivity.this, "Error setting screensaver", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
