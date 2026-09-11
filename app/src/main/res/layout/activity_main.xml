@@ -27,7 +27,7 @@
         android:background="#C0392B" 
         android:padding="16dp"
         android:layout_marginBottom="16dp"
-        android:visibility="gone"> <!-- Hidden by default, shown via Java if needed -->
+        android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
@@ -119,12 +119,13 @@
         </LinearLayout>
     </LinearLayout>
 
+    <!-- FIXED: Comments removed from inside the property tags -->
     <Button
         android:id="@+id/btn_apply_timeouts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save Custom Timeouts"
-        android:backgroundTint="#F39C12" <!-- Vibrant Accent Gold -->
+        android:backgroundTint="#F39C12"
         android:textColor="#0D1B2A"
         android:textStyle="bold"
         android:layout_marginBottom="16dp"/>
