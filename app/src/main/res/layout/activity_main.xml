@@ -48,7 +48,6 @@
 
         </LinearLayout>
 
-
         <!-- PLATFORM BADGE -->
 
         <LinearLayout
@@ -164,9 +163,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-
         <!-- ======================================================== -->
-        <!-- SCREENSAVER CARD                                          -->
+        <!-- SCREENSAVER TIMEOUT CARD                                 -->
         <!-- ======================================================== -->
 
         <LinearLayout
@@ -266,10 +264,10 @@
                     android:textColorHint="#8995A5"
                     android:textSize="10sp"
                     android:background="@drawable/bg_edit_text_focus"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
                     android:padding="2dp"
                     android:minHeight="0dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:layout_marginStart="3dp" />
 
             </LinearLayout>
@@ -278,7 +276,7 @@
 
 
         <!-- ======================================================== -->
-        <!-- SLEEP CARD                                                -->
+        <!-- SYSTEM SLEEP CARD                                         -->
         <!-- ======================================================== -->
 
         <LinearLayout
@@ -378,10 +376,10 @@
                     android:textColorHint="#8995A5"
                     android:textSize="10sp"
                     android:background="@drawable/bg_edit_text_focus"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
                     android:padding="2dp"
                     android:minHeight="0dp"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:layout_marginStart="3dp" />
 
             </LinearLayout>
@@ -392,7 +390,8 @@
 
 
     <!-- ============================================================ -->
-    <!-- SAVE ACTION                                                   -->
+    <!-- ACTIONS                                                       -->
+    <!-- PREVIEW BUTTON REMOVED                                       -->
     <!-- ============================================================ -->
 
     <LinearLayout
@@ -413,7 +412,7 @@
             android:textColor="#777F89"
             android:textStyle="bold"
             android:textSize="11sp"
-            android:background="@drawable/bg_tv_button_focus"
+            android:background="@drawable/bg_save_disabled"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:minHeight="0dp"
@@ -438,6 +437,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
+        <!-- LEFT: TITLE + CURRENT APP -->
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -452,15 +453,36 @@
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Choose which screensaver to use"
-                android:textColor="#8995A5"
-                android:textSize="10sp"
-                android:layout_marginTop="1dp" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="1dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Choose which screensaver to use"
+                    android:textColor="#8995A5"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tv_current_daydream"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="  ·  CURRENT: --"
+                    android:textColor="#65D6CC"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
+                    android:maxLines="1"
+                    android:ellipsize="end" />
+
+            </LinearLayout>
 
         </LinearLayout>
+
+        <!-- SYSTEM ACCESS -->
 
         <TextView
             android:id="@+id/tv_access_status"
@@ -469,7 +491,8 @@
             android:text="● SYSTEM ACCESS"
             android:textColor="#65D6CC"
             android:textSize="10sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:maxLines="1" />
 
     </LinearLayout>
 
@@ -486,7 +509,7 @@
         android:padding="4dp"
         android:layout_marginTop="6dp"
         android:fillViewport="true"
-        android:focusable="false"
+        android:fadeScrollbars="false"
         app:layout_constraintTop_toBottomOf="@id/screensaver_header"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -497,7 +520,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:focusable="false" />
+            android:divider="@null" />
 
     </ScrollView>
 
