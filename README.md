@@ -41,7 +41,7 @@ adb devices
 Copy and paste the exact command below into your computer's terminal to give **TVScreensaverManager** the power to change your screensaver:
 
 ```bash
-adb shell pm grant com.kscreensavermanager android.permission.WRITE_SECURE_SETTINGS
+adb shell pm grant com.tvscreensavermanager android.permission.WRITE_SECURE_SETTINGS
 ```
 ---
 
