@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.screensavermanager'
+    namespace 'com.kscreensavermanager'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.screensavermanager"
+        applicationId "com.kscreensavermanager"
         minSdk 21
         targetSdk 34
         versionCode 1
