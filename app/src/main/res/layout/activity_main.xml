@@ -1,193 +1,360 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="24dp"
-    android:background="#0D1B2A">
+    android:background="#0B1018"
+    android:padding="28dp">
 
-    <!-- TITLE -->
-    <TextView
-        android:layout_width="wrap_content"
+    <!-- ============================================================ -->
+    <!-- HEADER                                                        -->
+    <!-- ============================================================ -->
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TV Screensaver Manager"
-        android:textColor="#FFFFFF"
-        android:textSize="26sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <!-- DYNAMIC ADB WARNING CARD -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TV SCREENSAVER MANAGER"
+                android:textColor="#F5F7FA"
+                android:textSize="27sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.03"
+                android:maxLines="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Manage your screensaver and power settings"
+                android:textColor="#8995A5"
+                android:textSize="14sp"
+                android:layout_marginTop="3dp" />
+
+        </LinearLayout>
+
+        <!-- PLATFORM BADGE -->
+
+        <LinearLayout
+            android:id="@+id/platform_badge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="end"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp"
+            android:paddingTop="9dp"
+            android:paddingBottom="9dp"
+            android:background="@drawable/bg_platform_badge">
+
+            <TextView
+                android:id="@+id/tv_platform"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="● GOOGLE TV"
+                android:textColor="#65D6CC"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_device"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Device"
+                android:textColor="#A9B3C0"
+                android:textSize="12sp"
+                android:layout_marginTop="2dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <!-- ============================================================ -->
+    <!-- PERMISSION WARNING                                            -->
+    <!-- ============================================================ -->
+
     <LinearLayout
         android:id="@+id/adb_warning_card"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="#C0392B"
-        android:padding="16dp"
-        android:layout_marginBottom="16dp"
-        android:visibility="gone">
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/bg_warning"
+        android:padding="14dp"
+        android:layout_marginTop="14dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="⚠️ SYSTEM PERMISSION REQUIRED"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginBottom="4dp" />
+            android:text="⚠"
+            android:textColor="#FFCB6B"
+            android:textSize="25sp"
+            android:layout_marginEnd="12dp" />
 
-        <TextView
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Please run this exact command from your computer ADB Terminal to grant permission:"
-            android:textColor="#EEEEEE"
-            android:textSize="14sp"
-            android:layout_marginBottom="8dp" />
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <!-- ADB COMMAND -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="adb shell pm grant com.kscreensavermanager android.permission.WRITE_SECURE_SETTINGS"
-            android:textColor="#FFFF00"
-            android:fontFamily="monospace"
-            android:background="#4A0000"
-            android:padding="10dp"
-            android:textSize="13sp"
-            android:textIsSelectable="true"
-            android:focusable="true" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SYSTEM ACCESS REQUIRED"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Run this ADB command to enable system settings control."
+                android:textColor="#B7C0CC"
+                android:textSize="12sp"
+                android:layout_marginTop="2dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="adb shell pm grant com.kscreensavermanager android.permission.WRITE_SECURE_SETTINGS"
+                android:textColor="#FFCB6B"
+                android:fontFamily="monospace"
+                android:textSize="11sp"
+                android:textIsSelectable="true"
+                android:layout_marginTop="5dp" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
-    <!-- CONFIGURATIONS -->
+
+    <!-- ============================================================ -->
+    <!-- TIMEOUT AREA                                                  -->
+    <!-- ============================================================ -->
+
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/timeout_area"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="2"
-        android:layout_marginBottom="16dp">
+        android:layout_marginTop="18dp"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- SCREENSAVER START -->
+        <!-- SCREENSAVER CARD -->
+
         <LinearLayout
+            android:id="@+id/off_card"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:paddingEnd="12dp">
+            android:background="@drawable/bg_card"
+            android:padding="17dp"
+            android:layout_marginEnd="7dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1. Screensaver Start Timeout"
-                android:textColor="#E0E1DD"
+                android:text="SCREENSAVER"
+                android:textColor="#F5F7FA"
                 android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time before screensaver starts"
+                android:textColor="#8995A5"
+                android:textSize="12sp"
+                android:layout_marginTop="2dp" />
+
+            <TextView
+                android:id="@+id/tv_off_current"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Currently set to: --"
+                android:textColor="#65D6CC"
+                android:textSize="15sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="6dp" />
+                android:layout_marginTop="11dp" />
+
+            <TextView
+                android:id="@+id/tv_off_pending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="New setting: --"
+                android:textColor="#FFB547"
+                android:textSize="12sp"
+                android:visibility="gone"
+                android:layout_marginTop="2dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="48dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="11dp">
 
                 <Button
                     android:id="@+id/btn_off_5m"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:minWidth="64dp"
-                    android:text="5m"
-                    android:layout_marginEnd="6dp"
-                    android:backgroundTint="#1B263B"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="5 MIN"
                     android:textColor="#FFFFFF"
-                    android:focusable="true" />
+                    android:textSize="12sp"
+                    android:background="@drawable/bg_tv_button"
+                    android:focusable="true"
+                    android:layout_marginEnd="4dp" />
 
                 <Button
                     android:id="@+id/btn_off_15m"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:minWidth="64dp"
-                    android:text="15m"
-                    android:layout_marginEnd="6dp"
-                    android:backgroundTint="#1B263B"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="15 MIN"
                     android:textColor="#FFFFFF"
-                    android:focusable="true" />
+                    android:textSize="12sp"
+                    android:background="@drawable/bg_tv_button"
+                    android:focusable="true"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp" />
 
                 <EditText
                     android:id="@+id/et_off_custom"
-                    android:layout_width="70dp"
-                    android:layout_height="48dp"
-                    android:hint="Min"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="CUSTOM"
                     android:inputType="number"
-                    android:textColor="#FFFFFF"
-                    android:textColorHint="#A0A0A0"
-                    android:background="#1B263B"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
                     android:gravity="center"
-                    android:selectAllOnFocus="true" />
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#8995A5"
+                    android:textSize="12sp"
+                    android:background="@drawable/bg_edit_text"
+                    android:padding="4dp"
+                    android:layout_marginStart="4dp" />
 
             </LinearLayout>
 
         </LinearLayout>
 
-        <!-- SYSTEM SLEEP -->
+
+        <!-- SLEEP CARD -->
+
         <LinearLayout
+            android:id="@+id/sleep_card"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:paddingStart="12dp">
+            android:background="@drawable/bg_card"
+            android:padding="17dp"
+            android:layout_marginStart="7dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2. System Sleep Timeout"
-                android:textColor="#E0E1DD"
+                android:text="SYSTEM SLEEP"
+                android:textColor="#F5F7FA"
                 android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Time before TV goes to sleep"
+                android:textColor="#8995A5"
+                android:textSize="12sp"
+                android:layout_marginTop="2dp" />
+
+            <TextView
+                android:id="@+id/tv_sleep_current"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Currently set to: --"
+                android:textColor="#65D6CC"
+                android:textSize="15sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="6dp" />
+                android:layout_marginTop="11dp" />
+
+            <TextView
+                android:id="@+id/tv_sleep_pending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="New setting: --"
+                android:textColor="#FFB547"
+                android:textSize="12sp"
+                android:visibility="gone"
+                android:layout_marginTop="2dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_height="48dp"
+                android:orientation="horizontal"
+                android:layout_marginTop="11dp">
 
                 <Button
                     android:id="@+id/btn_sleep_30m"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:minWidth="70dp"
-                    android:text="30m"
-                    android:layout_marginEnd="6dp"
-                    android:backgroundTint="#1B263B"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="30 MIN"
                     android:textColor="#FFFFFF"
-                    android:focusable="true" />
+                    android:textSize="12sp"
+                    android:background="@drawable/bg_tv_button"
+                    android:focusable="true"
+                    android:layout_marginEnd="4dp" />
 
                 <Button
                     android:id="@+id/btn_sleep_never"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:minWidth="76dp"
-                    android:text="Never"
-                    android:layout_marginEnd="6dp"
-                    android:backgroundTint="#1B263B"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="NEVER"
                     android:textColor="#FFFFFF"
-                    android:focusable="true" />
+                    android:textSize="12sp"
+                    android:background="@drawable/bg_tv_button"
+                    android:focusable="true"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp" />
 
                 <EditText
                     android:id="@+id/et_sleep_custom"
-                    android:layout_width="70dp"
-                    android:layout_height="48dp"
-                    android:hint="Min"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="CUSTOM"
                     android:inputType="number"
-                    android:textColor="#FFFFFF"
-                    android:textColorHint="#A0A0A0"
-                    android:background="#1B263B"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
                     android:gravity="center"
-                    android:selectAllOnFocus="true" />
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#8995A5"
+                    android:textSize="12sp"
+                    android:background="@drawable/bg_edit_text"
+                    android:padding="4dp"
+                    android:layout_marginStart="4dp" />
 
             </LinearLayout>
 
@@ -195,37 +362,117 @@
 
     </LinearLayout>
 
-    <!-- SAVE BUTTON -->
-    <Button
-        android:id="@+id/btn_apply_timeouts"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:minWidth="220dp"
-        android:text="Save Custom Timeouts"
-        android:backgroundTint="#F39C12"
-        android:textColor="#0D1B2A"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp"
-        android:focusable="true" />
 
-    <!-- DAYDREAM TITLE -->
-    <TextView
-        android:layout_width="wrap_content"
+    <!-- ============================================================ -->
+    <!-- ACTIONS                                                       -->
+    <!-- ============================================================ -->
+
+    <LinearLayout
+        android:id="@+id/action_area"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toBottomOf="@id/timeout_area"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/btn_start_screensaver"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="▶  PREVIEW SCREENSAVER"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="13sp"
+            android:background="@drawable/bg_tv_button"
+            android:focusable="true"
+            android:layout_marginEnd="5dp" />
+
+        <Button
+            android:id="@+id/btn_apply_timeouts"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="✓  SAVE CHANGES"
+            android:textColor="#777F89"
+            android:textStyle="bold"
+            android:textSize="13sp"
+            android:background="@drawable/bg_save_disabled"
+            android:focusable="true"
+            android:layout_marginStart="5dp" />
+
+    </LinearLayout>
+
+
+    <!-- ============================================================ -->
+    <!-- SCREENSAVER SECTION                                           -->
+    <!-- ============================================================ -->
+
+    <LinearLayout
+        android:id="@+id/screensaver_header"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="3. Detected Daydream Apps (Select to Enable)"
-        android:textColor="#E0E1DD"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="6dp" />
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="14dp"
+        app:layout_constraintTop_toBottomOf="@id/action_area"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <!-- DAYDREAM APP LIST -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SCREENSAVER"
+                android:textColor="#F5F7FA"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose which screensaver to use"
+                android:textColor="#8995A5"
+                android:textSize="12sp"
+                android:layout_marginTop="2dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_access_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="● SYSTEM ACCESS"
+            android:textColor="#65D6CC"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+    <!-- ============================================================ -->
+    <!-- APP LIST                                                      -->
+    <!-- ============================================================ -->
+
     <ScrollView
-        android:layout_width="match_parent"
+        android:id="@+id/daydream_scroll"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#1B263B"
-        android:padding="8dp"
-        android:fillViewport="true">
+        android:background="@drawable/bg_card"
+        android:padding="5dp"
+        android:layout_marginTop="8dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/screensaver_header"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <RadioGroup
             android:id="@+id/rg_daydream_apps"
@@ -235,4 +482,4 @@
 
     </ScrollView>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
