@@ -11,6 +11,11 @@
         android:name="android.software.leanback"
         android:required="false" />
 
+    <!-- Explicitly declares this is a television-compatible app for the Play Store -->
+    <uses-feature
+        android:name="android.hardware.type.television"
+        android:required="false" />
+
     <!-- Don't require a touchscreen -->
     <uses-feature
         android:name="android.hardware.touchscreen"
@@ -25,6 +30,8 @@
 
     <application
         android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:banner="@drawable/tv_banner"
         android:label="TV Screensaver Manager"
         android:theme="@style/Theme.Leanback">
 
