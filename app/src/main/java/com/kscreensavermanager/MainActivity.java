@@ -3,14 +3,14 @@
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
- * published by the Free Software Foundation, either version 3
- * of the License, or (at your option) any later version.
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  */
 
 package com.kscreensavermanager;
 
 import android.app.Activity;
-import android.content.Intent;
+import android.content.ComponentName;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.content.res.ColorStateList;
@@ -44,7 +44,7 @@ public class MainActivity extends Activity {
     private TextView tvPlatform;
     private TextView tvDevice;
     private TextView tvAccessStatus;
-    private TextView tvCurrentScreensaver;
+    private TextView tvCurrentDaydream;
 
     private TextView tvOffCurrent;
     private TextView tvOffPending;
@@ -70,7 +70,10 @@ public class MainActivity extends Activity {
     private int pendingOffMs = -1;
     private int pendingSleepMs = -1;
 
+    // Currently stored screensaver component.
     private String currentDaydreamComponent = "";
+
+    // Screensaver selected by the user.
     private String pendingDaydreamComponent = "";
 
     private TvPlatform.Type platform;
@@ -125,41 +128,25 @@ public class MainActivity extends Activity {
 
     private void initializeViews() {
 
-        etOffCustom =
-                findViewById(R.id.et_off_custom);
+        etOffCustom = findViewById(R.id.et_off_custom);
+        etSleepCustom = findViewById(R.id.et_sleep_custom);
 
-        etSleepCustom =
-                findViewById(R.id.et_sleep_custom);
+        rgDaydreamApps = findViewById(R.id.rg_daydream_apps);
 
-        rgDaydreamApps =
-                findViewById(R.id.rg_daydream_apps);
+        adbWarningCard = findViewById(R.id.adb_warning_card);
 
-        adbWarningCard =
-                findViewById(R.id.adb_warning_card);
+        tvPlatform = findViewById(R.id.tv_platform);
+        tvDevice = findViewById(R.id.tv_device);
+        tvAccessStatus = findViewById(R.id.tv_access_status);
 
-        tvPlatform =
-                findViewById(R.id.tv_platform);
+        tvCurrentDaydream =
+                findViewById(R.id.tv_current_daydream);
 
-        tvDevice =
-                findViewById(R.id.tv_device);
+        tvOffCurrent = findViewById(R.id.tv_off_current);
+        tvOffPending = findViewById(R.id.tv_off_pending);
 
-        tvAccessStatus =
-                findViewById(R.id.tv_access_status);
-
-        tvCurrentScreensaver =
-                findViewById(R.id.tv_current_screensaver);
-
-        tvOffCurrent =
-                findViewById(R.id.tv_off_current);
-
-        tvOffPending =
-                findViewById(R.id.tv_off_pending);
-
-        tvSleepCurrent =
-                findViewById(R.id.tv_sleep_current);
-
-        tvSleepPending =
-                findViewById(R.id.tv_sleep_pending);
+        tvSleepCurrent = findViewById(R.id.tv_sleep_current);
+        tvSleepPending = findViewById(R.id.tv_sleep_pending);
 
         btnApply =
                 findViewById(R.id.btn_apply_timeouts);
@@ -171,8 +158,7 @@ public class MainActivity extends Activity {
 
     private void updatePlatformHeader() {
 
-        if (tvPlatform == null ||
-                tvDevice == null) {
+        if (tvPlatform == null || tvDevice == null) {
             return;
         }
 
@@ -182,14 +168,11 @@ public class MainActivity extends Activity {
 
         String model = Build.MODEL;
 
-        if (model == null ||
-                model.trim().isEmpty()) {
-
+        if (model == null || model.trim().isEmpty()) {
             model = "TV device";
         }
 
-        String androidVersion =
-                Build.VERSION.RELEASE;
+        String androidVersion = Build.VERSION.RELEASE;
 
         if (androidVersion == null ||
                 androidVersion.trim().isEmpty()) {
@@ -198,13 +181,10 @@ public class MainActivity extends Activity {
         }
 
         tvDevice.setText(
-                model
-                        + "  ·  Android "
-                        + androidVersion
+                model + "  ·  Android " + androidVersion
         );
 
-        if (platform ==
-                TvPlatform.Type.FIRE_TV) {
+        if (platform == TvPlatform.Type.FIRE_TV) {
 
             tvPlatform.setTextColor(
                     0xFFFFA726
@@ -226,24 +206,25 @@ public class MainActivity extends Activity {
 
         try {
 
+            /*
+             * Reading Secure Settings alone does not reliably prove
+             * that WRITE_SECURE_SETTINGS is available.
+             *
+             * Therefore we perform a harmless write using the current
+             * value.
+             */
+
             Settings.Secure.getString(
                     getContentResolver(),
                     "screensaver_components"
             );
 
-            int enabled =
-                    Settings.Secure.getInt(
-                            getContentResolver(),
-                            "screensaver_enabled",
-                            1
-                    );
+            int enabled = Settings.Secure.getInt(
+                    getContentResolver(),
+                    "screensaver_enabled",
+                    1
+            );
 
-            /*
-             * This write is intentional.
-             *
-             * Reading Secure Settings does not necessarily prove that
-             * WRITE_SECURE_SETTINGS is available.
-             */
             Settings.Secure.putInt(
                     getContentResolver(),
                     "screensaver_enabled",
@@ -341,7 +322,7 @@ public class MainActivity extends Activity {
             }
 
             // -------------------------------------------------------
-            // Currently selected screensaver
+            // Current screensaver
             // -------------------------------------------------------
 
             try {
@@ -370,7 +351,7 @@ public class MainActivity extends Activity {
         }
 
         // -----------------------------------------------------------
-        // Initially there are no unsaved changes
+        // Initially there are no unsaved changes.
         // -----------------------------------------------------------
 
         pendingOffMs =
@@ -402,7 +383,7 @@ public class MainActivity extends Activity {
                 findViewById(R.id.btn_sleep_never);
 
         // -----------------------------------------------------------
-        // Screensaver timeout - 5 minutes
+        // Screensaver timeout: 5 minutes
         // -----------------------------------------------------------
 
         off5.setOnClickListener(v -> {
@@ -416,7 +397,7 @@ public class MainActivity extends Activity {
         });
 
         // -----------------------------------------------------------
-        // Screensaver timeout - 15 minutes
+        // Screensaver timeout: 15 minutes
         // -----------------------------------------------------------
 
         off15.setOnClickListener(v -> {
@@ -430,7 +411,7 @@ public class MainActivity extends Activity {
         });
 
         // -----------------------------------------------------------
-        // Sleep timeout - 30 minutes
+        // Sleep timeout: 30 minutes
         // -----------------------------------------------------------
 
         sleep30.setOnClickListener(v -> {
@@ -444,7 +425,7 @@ public class MainActivity extends Activity {
         });
 
         // -----------------------------------------------------------
-        // Sleep timeout - Never
+        // Sleep timeout: Never
         // -----------------------------------------------------------
 
         sleepNever.setOnClickListener(v -> {
@@ -612,26 +593,16 @@ public class MainActivity extends Activity {
 
         tvOffCurrent.setText(
                 "Currently set to: "
-                        + formatTimeout(
-                        currentOffMs
-                )
+                        + formatTimeout(currentOffMs)
         );
 
         tvSleepCurrent.setText(
                 "Currently set to: "
-                        + formatTimeout(
-                        currentSleepMs
-                )
+                        + formatTimeout(currentSleepMs)
         );
 
         // -----------------------------------------------------------
-        // Current screensaver application
-        // -----------------------------------------------------------
-
-        updateCurrentScreensaverLabel();
-
-        // -----------------------------------------------------------
-        // Pending screensaver value
+        // Pending screensaver timeout
         // -----------------------------------------------------------
 
         boolean offChanged =
@@ -658,7 +629,7 @@ public class MainActivity extends Activity {
         }
 
         // -----------------------------------------------------------
-        // Pending sleep value
+        // Pending sleep timeout
         // -----------------------------------------------------------
 
         boolean sleepChanged =
@@ -685,13 +656,19 @@ public class MainActivity extends Activity {
         }
 
         // -----------------------------------------------------------
-        // Highlight selected presets
+        // Preset highlighting
         // -----------------------------------------------------------
 
         updatePresetSelection();
 
         // -----------------------------------------------------------
-        // Screensaver rows
+        // Screensaver current/selected app
+        // -----------------------------------------------------------
+
+        updateCurrentDaydreamLabel();
+
+        // -----------------------------------------------------------
+        // Screensaver row highlighting
         // -----------------------------------------------------------
 
         updateDaydreamRows();
@@ -707,84 +684,68 @@ public class MainActivity extends Activity {
     // CURRENT SCREENSAVER LABEL
     // ===============================================================
 
-    private void updateCurrentScreensaverLabel() {
+    private void updateCurrentDaydreamLabel() {
 
-        if (tvCurrentScreensaver == null) {
+        if (tvCurrentDaydream == null) {
             return;
         }
 
-        if (currentDaydreamComponent == null ||
-                currentDaydreamComponent.isEmpty()) {
+        String component =
+                pendingDaydreamComponent;
 
-            tvCurrentScreensaver.setText(
-                    "Current: None"
-            );
+        if (component == null ||
+                component.trim().isEmpty()) {
 
-            tvCurrentScreensaver.setTextColor(
-                    0xFF8995A5
+            tvCurrentDaydream.setText(
+                    "  ·  CURRENT: None"
             );
 
             return;
+        }
+
+        String packageName =
+                component;
+
+        int slash =
+                packageName.indexOf('/');
+
+        if (slash > 0) {
+
+            packageName =
+                    packageName.substring(
+                            0,
+                            slash
+                    );
         }
 
         try {
 
-            String[] parts =
-                    currentDaydreamComponent.split(
-                            "/",
-                            2
-                    );
-
-            if (parts.length != 2) {
-
-                tvCurrentScreensaver.setText(
-                        "Current: Unknown"
-                );
-
-                tvCurrentScreensaver.setTextColor(
-                        0xFF8995A5
-                );
-
-                return;
-            }
-
-            String packageName =
-                    parts[0];
-
-            android.content.pm.ApplicationInfo appInfo =
-                    packageManager.getApplicationInfo(
-                            packageName,
-                            0
-                    );
-
             CharSequence label =
                     packageManager.getApplicationLabel(
-                            appInfo
+                            packageManager.getApplicationInfo(
+                                    packageName,
+                                    0
+                            )
                     );
 
-            if (label == null ||
-                    label.toString().trim().isEmpty()) {
+            if (label != null &&
+                    label.length() > 0) {
 
-                label = packageName;
+                tvCurrentDaydream.setText(
+                        "  ·  CURRENT: " + label
+                );
+
+            } else {
+
+                tvCurrentDaydream.setText(
+                        "  ·  CURRENT: " + packageName
+                );
             }
-
-            tvCurrentScreensaver.setText(
-                    "Current: " + label
-            );
-
-            tvCurrentScreensaver.setTextColor(
-                    TEAL
-            );
 
         } catch (Exception e) {
 
-            tvCurrentScreensaver.setText(
-                    "Current: "
-                            + currentDaydreamComponent
-            );
-
-            tvCurrentScreensaver.setTextColor(
-                    0xFF8995A5
+            tvCurrentDaydream.setText(
+                    "  ·  CURRENT: " + packageName
             );
         }
     }
@@ -834,6 +795,11 @@ public class MainActivity extends Activity {
         Button button =
                 (Button) view;
 
+        /*
+         * The drawable itself handles the TV focus border.
+         *
+         * Tint is still used here for the selected/pending state.
+         */
         if (selected) {
 
             button.setBackgroundTintList(
@@ -889,9 +855,7 @@ public class MainActivity extends Activity {
                     "✓  SAVE CHANGES"
             );
 
-            btnApply.setEnabled(
-                    true
-            );
+            btnApply.setEnabled(true);
 
         } else {
 
@@ -909,9 +873,7 @@ public class MainActivity extends Activity {
                     "SAVE CHANGES"
             );
 
-            btnApply.setEnabled(
-                    false
-            );
+            btnApply.setEnabled(false);
         }
     }
 
@@ -925,10 +887,14 @@ public class MainActivity extends Activity {
     }
 
     // ===============================================================
-    // SAVE BUTTON
+    // SAVE BUTTON SETUP
     // ===============================================================
 
     private void setupSaveButton() {
+
+        if (btnApply == null) {
+            return;
+        }
 
         btnApply.setOnClickListener(
                 v -> saveSettings()
@@ -949,7 +915,7 @@ public class MainActivity extends Activity {
         }
 
         // -----------------------------------------------------------
-        // Read custom values currently typed in the boxes
+        // Read custom fields before saving.
         // -----------------------------------------------------------
 
         if (!readCustomOff() ||
@@ -979,8 +945,9 @@ public class MainActivity extends Activity {
 
                 /*
                  * Some TV firmware uses this additional value.
-                 * Not all devices expose it, so failure is ignored.
+                 * Failure is intentionally ignored.
                  */
+
                 try {
 
                     Settings.Secure.putInt(
@@ -1032,7 +999,7 @@ public class MainActivity extends Activity {
             }
 
             // -------------------------------------------------------
-            // Update our current values
+            // Update our current values.
             // -------------------------------------------------------
 
             currentOffMs =
@@ -1069,6 +1036,10 @@ public class MainActivity extends Activity {
     // ===============================================================
 
     private void discoverAndPopulateDaydreams() {
+
+        if (rgDaydreamApps == null) {
+            return;
+        }
 
         rgDaydreamApps.removeAllViews();
 
@@ -1137,8 +1108,18 @@ public class MainActivity extends Activity {
                             packageManager
                     );
 
+            if (label == null ||
+                    label.length() == 0) {
+
+                label = packageName;
+            }
+
             RadioButton row =
                     new RadioButton(this);
+
+            // -------------------------------------------------------
+            // Main app name
+            // -------------------------------------------------------
 
             row.setText(
                     label
@@ -1154,24 +1135,28 @@ public class MainActivity extends Activity {
                     14
             );
 
+            // -------------------------------------------------------
+            // Radio button colours
+            // -------------------------------------------------------
+
             row.setButtonTintList(
                     new ColorStateList(
                             new int[][]{
                                     new int[]{
                                             android.R.attr.state_checked
                                     },
-                                    new int[]{
-                                            android.R.attr.state_focused
-                                    },
                                     new int[]{}
                             },
                             new int[]{
-                                    TEAL,
                                     TEAL,
                                     0xFF687383
                             }
                     )
             );
+
+            // -------------------------------------------------------
+            // Row sizing / TV focus
+            // -------------------------------------------------------
 
             row.setPadding(
                     14,
@@ -1196,6 +1181,22 @@ public class MainActivity extends Activity {
                     component
             );
 
+            /*
+             * Use the focus-aware drawable created for the
+             * screensaver rows.
+             */
+            if (Build.VERSION.SDK_INT >=
+                    Build.VERSION_CODES.JELLY_BEAN) {
+
+                row.setBackgroundResource(
+                        R.drawable.bg_daydream_row
+                );
+            }
+
+            // -------------------------------------------------------
+            // Initial selection
+            // -------------------------------------------------------
+
             if (component.equals(
                     pendingDaydreamComponent
             )) {
@@ -1204,6 +1205,10 @@ public class MainActivity extends Activity {
                         true
                 );
             }
+
+            // -------------------------------------------------------
+            // Click / select
+            // -------------------------------------------------------
 
             row.setOnClickListener(
                     v -> {
@@ -1224,17 +1229,28 @@ public class MainActivity extends Activity {
 
                         updateDaydreamRows();
 
+                        updateCurrentDaydreamLabel();
+
                         updateSaveButton();
                     }
             );
 
-            /*
-             * Keep the focus highlight visible when navigating
-             * with a TV remote.
-             */
+            // -------------------------------------------------------
+            // Focus changes
+            // -------------------------------------------------------
+
             row.setOnFocusChangeListener(
-                    (v, hasFocus) ->
-                            updateDaydreamRows()
+                    (v, hasFocus) -> {
+
+                        /*
+                         * The selector drawable handles the visual
+                         * focus border.
+                         *
+                         * Refresh the row state so the selected
+                         * background remains consistent.
+                         */
+                        updateDaydreamRows();
+                    }
             );
 
             rgDaydreamApps.addView(
@@ -1243,6 +1259,8 @@ public class MainActivity extends Activity {
         }
 
         updateDaydreamRows();
+
+        updateCurrentDaydreamLabel();
     }
 
     // ===============================================================
@@ -1279,48 +1297,9 @@ public class MainActivity extends Activity {
                             pendingDaydreamComponent
                     );
 
-            boolean focused =
-                    row.hasFocus();
-
             row.setChecked(
                     selected
             );
-
-            /*
-             * Selected row:
-             * dark teal background.
-             *
-             * Focused row:
-             * brighter teal background so it can clearly be seen
-             * while navigating with the TV remote.
-             *
-             * Focused + selected:
-             * strongest highlight.
-             */
-            if (selected && focused) {
-
-                row.setBackgroundResource(
-                        R.drawable.bg_daydream_row
-                );
-
-            } else if (focused) {
-
-                row.setBackgroundResource(
-                        R.drawable.bg_daydream_row
-                );
-
-            } else if (selected) {
-
-                row.setBackgroundColor(
-                        0xFF17363E
-                );
-
-            } else {
-
-                row.setBackgroundColor(
-                        0x00151C27
-                );
-            }
         }
     }
 
@@ -1329,8 +1308,7 @@ public class MainActivity extends Activity {
     // ===============================================================
 
     private String formatTimeout(
-            int milliseconds
-    ) {
+            int milliseconds) {
 
         if (milliseconds < 0) {
             return "Unavailable";
@@ -1346,12 +1324,10 @@ public class MainActivity extends Activity {
                 milliseconds / 60000L;
 
         if (minutes <= 0) {
-
             return "Less than 1 minute";
         }
 
         if (minutes == 1) {
-
             return "1 minute";
         }
 
@@ -1397,8 +1373,7 @@ public class MainActivity extends Activity {
     }
 
     private void showToast(
-            String message
-    ) {
+            String message) {
 
         Toast.makeText(
                 this,
@@ -1420,6 +1395,7 @@ public class MainActivity extends Activity {
          * During initial Activity creation the views may not yet
          * have been initialized.
          */
+
         if (etOffCustom == null) {
             return;
         }
@@ -1428,6 +1404,7 @@ public class MainActivity extends Activity {
          * Don't overwrite unsaved user selections when returning
          * from another screen.
          */
+
         boolean hadChanges =
                 hasChanges();
 
@@ -1436,6 +1413,13 @@ public class MainActivity extends Activity {
         if (!hadChanges) {
 
             loadCurrentSettings();
+
+            /*
+             * Re-discovering the apps isn't normally necessary,
+             * but refreshing the current app label ensures the
+             * displayed name is correct after returning.
+             */
+            discoverAndPopulateDaydreams();
         }
 
         updateUi();
