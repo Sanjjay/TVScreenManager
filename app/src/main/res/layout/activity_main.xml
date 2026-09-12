@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#0B1018"
-    android:padding="28dp">
+    android:padding="22dp">
 
     <!-- ============================================================ -->
     <!-- HEADER                                                        -->
@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:text="TV SCREENSAVER MANAGER"
                 android:textColor="#F5F7FA"
-                android:textSize="27sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 android:letterSpacing="0.03"
                 android:maxLines="1" />
@@ -43,8 +43,8 @@
                 android:layout_height="wrap_content"
                 android:text="Manage your screensaver and power settings"
                 android:textColor="#8995A5"
-                android:textSize="14sp"
-                android:layout_marginTop="3dp" />
+                android:textSize="13sp"
+                android:layout_marginTop="2dp" />
 
         </LinearLayout>
 
@@ -56,10 +56,10 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="end"
-            android:paddingStart="18dp"
-            android:paddingEnd="18dp"
-            android:paddingTop="9dp"
-            android:paddingBottom="9dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:paddingTop="7dp"
+            android:paddingBottom="7dp"
             android:background="@drawable/bg_platform_badge">
 
             <TextView
@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:text="● GOOGLE TV"
                 android:textColor="#65D6CC"
-                android:textSize="15sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -77,8 +77,8 @@
                 android:layout_height="wrap_content"
                 android:text="Device"
                 android:textColor="#A9B3C0"
-                android:textSize="12sp"
-                android:layout_marginTop="2dp" />
+                android:textSize="11sp"
+                android:layout_marginTop="1dp" />
 
         </LinearLayout>
 
@@ -87,6 +87,10 @@
 
     <!-- ============================================================ -->
     <!-- PERMISSION WARNING                                            -->
+    <!--                                                             -->
+    <!-- When Java sets this GONE after the ADB grant, the timeout     -->
+    <!-- area automatically moves up because it is constrained below  -->
+    <!-- this view.                                                    -->
     <!-- ============================================================ -->
 
     <LinearLayout
@@ -96,8 +100,8 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:background="@drawable/bg_warning"
-        android:padding="14dp"
-        android:layout_marginTop="14dp"
+        android:padding="11dp"
+        android:layout_marginTop="10dp"
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/header"
         app:layout_constraintStart_toStartOf="parent"
@@ -108,8 +112,8 @@
             android:layout_height="wrap_content"
             android:text="⚠"
             android:textColor="#FFCB6B"
-            android:textSize="25sp"
-            android:layout_marginEnd="12dp" />
+            android:textSize="21sp"
+            android:layout_marginEnd="10dp" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -122,7 +126,7 @@
                 android:layout_height="wrap_content"
                 android:text="SYSTEM ACCESS REQUIRED"
                 android:textColor="#FFFFFF"
-                android:textSize="14sp"
+                android:textSize="13sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -130,8 +134,8 @@
                 android:layout_height="wrap_content"
                 android:text="Run this ADB command to enable system settings control."
                 android:textColor="#B7C0CC"
-                android:textSize="12sp"
-                android:layout_marginTop="2dp" />
+                android:textSize="11sp"
+                android:layout_marginTop="1dp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -139,9 +143,9 @@
                 android:text="adb shell pm grant com.kscreensavermanager android.permission.WRITE_SECURE_SETTINGS"
                 android:textColor="#FFCB6B"
                 android:fontFamily="monospace"
-                android:textSize="11sp"
+                android:textSize="10sp"
                 android:textIsSelectable="true"
-                android:layout_marginTop="5dp" />
+                android:layout_marginTop="4dp" />
 
         </LinearLayout>
 
@@ -150,6 +154,10 @@
 
     <!-- ============================================================ -->
     <!-- TIMEOUT AREA                                                  -->
+    <!--                                                             -->
+    <!-- Smaller vertically so the screensaver list gets more room.  -->
+    <!-- It is constrained below the warning, so when the warning     -->
+    <!-- becomes GONE this section moves directly underneath header.  -->
     <!-- ============================================================ -->
 
     <LinearLayout
@@ -158,12 +166,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="2"
-        android:layout_marginTop="18dp"
-        app:layout_constraintTop_toBottomOf="@id/header"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/adb_warning_card"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- SCREENSAVER CARD -->
+        <!-- ======================================================== -->
+        <!-- SCREENSAVER CARD                                          -->
+        <!-- ======================================================== -->
 
         <LinearLayout
             android:id="@+id/off_card"
@@ -172,15 +182,15 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:background="@drawable/bg_card"
-            android:padding="17dp"
-            android:layout_marginEnd="7dp">
+            android:padding="12dp"
+            android:layout_marginEnd="5dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="SCREENSAVER"
                 android:textColor="#F5F7FA"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -188,8 +198,8 @@
                 android:layout_height="wrap_content"
                 android:text="Time before screensaver starts"
                 android:textColor="#8995A5"
-                android:textSize="12sp"
-                android:layout_marginTop="2dp" />
+                android:textSize="10sp"
+                android:layout_marginTop="1dp" />
 
             <TextView
                 android:id="@+id/tv_off_current"
@@ -197,9 +207,9 @@
                 android:layout_height="wrap_content"
                 android:text="Currently set to: --"
                 android:textColor="#65D6CC"
-                android:textSize="15sp"
+                android:textSize="13sp"
                 android:textStyle="bold"
-                android:layout_marginTop="11dp" />
+                android:layout_marginTop="7dp" />
 
             <TextView
                 android:id="@+id/tv_off_pending"
@@ -207,15 +217,15 @@
                 android:layout_height="wrap_content"
                 android:text="New setting: --"
                 android:textColor="#FFB547"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:visibility="gone"
-                android:layout_marginTop="2dp" />
+                android:layout_marginTop="1dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="38dp"
                 android:orientation="horizontal"
-                android:layout_marginTop="11dp">
+                android:layout_marginTop="7dp">
 
                 <Button
                     android:id="@+id/btn_off_5m"
@@ -224,10 +234,13 @@
                     android:layout_weight="1"
                     android:text="5 MIN"
                     android:textColor="#FFFFFF"
-                    android:textSize="12sp"
+                    android:textSize="10sp"
                     android:background="@drawable/bg_tv_button"
                     android:focusable="true"
-                    android:layout_marginEnd="4dp" />
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:padding="2dp"
+                    android:layout_marginEnd="3dp" />
 
                 <Button
                     android:id="@+id/btn_off_15m"
@@ -236,11 +249,14 @@
                     android:layout_weight="1"
                     android:text="15 MIN"
                     android:textColor="#FFFFFF"
-                    android:textSize="12sp"
+                    android:textSize="10sp"
                     android:background="@drawable/bg_tv_button"
                     android:focusable="true"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="4dp" />
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:padding="2dp"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginEnd="3dp" />
 
                 <EditText
                     android:id="@+id/et_off_custom"
@@ -252,17 +268,20 @@
                     android:gravity="center"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#8995A5"
-                    android:textSize="12sp"
+                    android:textSize="10sp"
                     android:background="@drawable/bg_edit_text"
-                    android:padding="4dp"
-                    android:layout_marginStart="4dp" />
+                    android:padding="2dp"
+                    android:minHeight="0dp"
+                    android:layout_marginStart="3dp" />
 
             </LinearLayout>
 
         </LinearLayout>
 
 
-        <!-- SLEEP CARD -->
+        <!-- ======================================================== -->
+        <!-- SLEEP CARD                                                -->
+        <!-- ======================================================== -->
 
         <LinearLayout
             android:id="@+id/sleep_card"
@@ -271,15 +290,15 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:background="@drawable/bg_card"
-            android:padding="17dp"
-            android:layout_marginStart="7dp">
+            android:padding="12dp"
+            android:layout_marginStart="5dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="SYSTEM SLEEP"
                 android:textColor="#F5F7FA"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -287,8 +306,8 @@
                 android:layout_height="wrap_content"
                 android:text="Time before TV goes to sleep"
                 android:textColor="#8995A5"
-                android:textSize="12sp"
-                android:layout_marginTop="2dp" />
+                android:textSize="10sp"
+                android:layout_marginTop="1dp" />
 
             <TextView
                 android:id="@+id/tv_sleep_current"
@@ -296,9 +315,9 @@
                 android:layout_height="wrap_content"
                 android:text="Currently set to: --"
                 android:textColor="#65D6CC"
-                android:textSize="15sp"
+                android:textSize="13sp"
                 android:textStyle="bold"
-                android:layout_marginTop="11dp" />
+                android:layout_marginTop="7dp" />
 
             <TextView
                 android:id="@+id/tv_sleep_pending"
@@ -306,15 +325,15 @@
                 android:layout_height="wrap_content"
                 android:text="New setting: --"
                 android:textColor="#FFB547"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:visibility="gone"
-                android:layout_marginTop="2dp" />
+                android:layout_marginTop="1dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="38dp"
                 android:orientation="horizontal"
-                android:layout_marginTop="11dp">
+                android:layout_marginTop="7dp">
 
                 <Button
                     android:id="@+id/btn_sleep_30m"
@@ -323,10 +342,13 @@
                     android:layout_weight="1"
                     android:text="30 MIN"
                     android:textColor="#FFFFFF"
-                    android:textSize="12sp"
+                    android:textSize="10sp"
                     android:background="@drawable/bg_tv_button"
                     android:focusable="true"
-                    android:layout_marginEnd="4dp" />
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:padding="2dp"
+                    android:layout_marginEnd="3dp" />
 
                 <Button
                     android:id="@+id/btn_sleep_never"
@@ -335,11 +357,14 @@
                     android:layout_weight="1"
                     android:text="NEVER"
                     android:textColor="#FFFFFF"
-                    android:textSize="12sp"
+                    android:textSize="10sp"
                     android:background="@drawable/bg_tv_button"
                     android:focusable="true"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="4dp" />
+                    android:minHeight="0dp"
+                    android:minWidth="0dp"
+                    android:padding="2dp"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginEnd="3dp" />
 
                 <EditText
                     android:id="@+id/et_sleep_custom"
@@ -351,10 +376,11 @@
                     android:gravity="center"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#8995A5"
-                    android:textSize="12sp"
+                    android:textSize="10sp"
                     android:background="@drawable/bg_edit_text"
-                    android:padding="4dp"
-                    android:layout_marginStart="4dp" />
+                    android:padding="2dp"
+                    android:minHeight="0dp"
+                    android:layout_marginStart="3dp" />
 
             </LinearLayout>
 
@@ -370,9 +396,9 @@
     <LinearLayout
         android:id="@+id/action_area"
         android:layout_width="0dp"
-        android:layout_height="52dp"
+        android:layout_height="42dp"
         android:orientation="horizontal"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@id/timeout_area"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -385,10 +411,13 @@
             android:text="▶  PREVIEW SCREENSAVER"
             android:textColor="#FFFFFF"
             android:textStyle="bold"
-            android:textSize="13sp"
+            android:textSize="11sp"
             android:background="@drawable/bg_tv_button"
             android:focusable="true"
-            android:layout_marginEnd="5dp" />
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:padding="2dp"
+            android:layout_marginEnd="4dp" />
 
         <Button
             android:id="@+id/btn_apply_timeouts"
@@ -398,10 +427,13 @@
             android:text="✓  SAVE CHANGES"
             android:textColor="#777F89"
             android:textStyle="bold"
-            android:textSize="13sp"
+            android:textSize="11sp"
             android:background="@drawable/bg_save_disabled"
             android:focusable="true"
-            android:layout_marginStart="5dp" />
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:padding="2dp"
+            android:layout_marginStart="4dp" />
 
     </LinearLayout>
 
@@ -416,7 +448,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="9dp"
         app:layout_constraintTop_toBottomOf="@id/action_area"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -432,7 +464,7 @@
                 android:layout_height="wrap_content"
                 android:text="SCREENSAVER"
                 android:textColor="#F5F7FA"
-                android:textSize="17sp"
+                android:textSize="15sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -440,8 +472,8 @@
                 android:layout_height="wrap_content"
                 android:text="Choose which screensaver to use"
                 android:textColor="#8995A5"
-                android:textSize="12sp"
-                android:layout_marginTop="2dp" />
+                android:textSize="10sp"
+                android:layout_marginTop="1dp" />
 
         </LinearLayout>
 
@@ -451,7 +483,7 @@
             android:layout_height="wrap_content"
             android:text="● SYSTEM ACCESS"
             android:textColor="#65D6CC"
-            android:textSize="11sp"
+            android:textSize="10sp"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -459,6 +491,9 @@
 
     <!-- ============================================================ -->
     <!-- APP LIST                                                      -->
+    <!--                                                             -->
+    <!-- This takes ALL remaining vertical space, giving room for at   -->
+    <!-- least five screensaver entries on the TV display.             -->
     <!-- ============================================================ -->
 
     <ScrollView
@@ -466,8 +501,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/bg_card"
-        android:padding="5dp"
-        android:layout_marginTop="8dp"
+        android:padding="4dp"
+        android:layout_marginTop="6dp"
         android:fillViewport="true"
         app:layout_constraintTop_toBottomOf="@id/screensaver_header"
         app:layout_constraintBottom_toBottomOf="parent"
