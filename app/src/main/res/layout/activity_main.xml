@@ -136,7 +136,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="adb shell pm grant com.kscreensavermanager android.permission.WRITE_SECURE_SETTINGS"
+                android:text="adb shell pm grant com.tvscreensavermanager android.permission.WRITE_SECURE_SETTINGS"
                 android:textColor="#FFCB6B"
                 android:fontFamily="monospace"
                 android:textSize="10sp"
