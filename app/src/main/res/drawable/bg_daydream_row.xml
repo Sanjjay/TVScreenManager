@@ -3,32 +3,32 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:state_focused="true">
-        <shape android:shape="rectangle">
-            <solid android:color="#17363E" />
+        <shape>
+            <solid android:color="#1F3D48" />
+            <corners android:radius="10dp" />
             <stroke
-                android:width="3dp"
+                android:width="2dp"
                 android:color="#65D6CC" />
-            <corners android:radius="6dp" />
         </shape>
     </item>
 
     <item android:state_checked="true">
-        <shape android:shape="rectangle">
+        <shape>
             <solid android:color="#17363E" />
+            <corners android:radius="10dp" />
             <stroke
                 android:width="1dp"
-                android:color="#2D7378" />
-            <corners android:radius="6dp" />
+                android:color="#65D6CC" />
         </shape>
     </item>
 
     <item>
-        <shape android:shape="rectangle">
-            <solid android:color="#00151C27" />
+        <shape>
+            <solid android:color="#151C27" />
+            <corners android:radius="10dp" />
             <stroke
                 android:width="1dp"
-                android:color="#25313D" />
-            <corners android:radius="6dp" />
+                android:color="#263447" />
         </shape>
     </item>
 
