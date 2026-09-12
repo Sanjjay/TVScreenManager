@@ -48,6 +48,7 @@
 
         </LinearLayout>
 
+
         <!-- PLATFORM BADGE -->
 
         <LinearLayout
@@ -87,10 +88,6 @@
 
     <!-- ============================================================ -->
     <!-- PERMISSION WARNING                                            -->
-    <!--                                                             -->
-    <!-- When Java sets this GONE after the ADB grant, the timeout     -->
-    <!-- area automatically moves up because it is constrained below  -->
-    <!-- this view.                                                    -->
     <!-- ============================================================ -->
 
     <LinearLayout
@@ -154,10 +151,6 @@
 
     <!-- ============================================================ -->
     <!-- TIMEOUT AREA                                                  -->
-    <!--                                                             -->
-    <!-- Smaller vertically so the screensaver list gets more room.  -->
-    <!-- It is constrained below the warning, so when the warning     -->
-    <!-- becomes GONE this section moves directly underneath header.  -->
     <!-- ============================================================ -->
 
     <LinearLayout
@@ -170,6 +163,7 @@
         app:layout_constraintTop_toBottomOf="@id/adb_warning_card"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
+
 
         <!-- ======================================================== -->
         <!-- SCREENSAVER CARD                                          -->
@@ -235,8 +229,9 @@
                     android:text="5 MIN"
                     android:textColor="#FFFFFF"
                     android:textSize="10sp"
-                    android:background="@drawable/bg_tv_button"
+                    android:background="@drawable/bg_tv_button_focus"
                     android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:minHeight="0dp"
                     android:minWidth="0dp"
                     android:padding="2dp"
@@ -250,8 +245,9 @@
                     android:text="15 MIN"
                     android:textColor="#FFFFFF"
                     android:textSize="10sp"
-                    android:background="@drawable/bg_tv_button"
+                    android:background="@drawable/bg_tv_button_focus"
                     android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:minHeight="0dp"
                     android:minWidth="0dp"
                     android:padding="2dp"
@@ -269,7 +265,9 @@
                     android:textColor="#FFFFFF"
                     android:textColorHint="#8995A5"
                     android:textSize="10sp"
-                    android:background="@drawable/bg_edit_text"
+                    android:background="@drawable/bg_edit_text_focus"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:padding="2dp"
                     android:minHeight="0dp"
                     android:layout_marginStart="3dp" />
@@ -343,8 +341,9 @@
                     android:text="30 MIN"
                     android:textColor="#FFFFFF"
                     android:textSize="10sp"
-                    android:background="@drawable/bg_tv_button"
+                    android:background="@drawable/bg_tv_button_focus"
                     android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:minHeight="0dp"
                     android:minWidth="0dp"
                     android:padding="2dp"
@@ -358,8 +357,9 @@
                     android:text="NEVER"
                     android:textColor="#FFFFFF"
                     android:textSize="10sp"
-                    android:background="@drawable/bg_tv_button"
+                    android:background="@drawable/bg_tv_button_focus"
                     android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:minHeight="0dp"
                     android:minWidth="0dp"
                     android:padding="2dp"
@@ -377,7 +377,9 @@
                     android:textColor="#FFFFFF"
                     android:textColorHint="#8995A5"
                     android:textSize="10sp"
-                    android:background="@drawable/bg_edit_text"
+                    android:background="@drawable/bg_edit_text_focus"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
                     android:padding="2dp"
                     android:minHeight="0dp"
                     android:layout_marginStart="3dp" />
@@ -390,7 +392,7 @@
 
 
     <!-- ============================================================ -->
-    <!-- ACTIONS                                                       -->
+    <!-- SAVE ACTION                                                   -->
     <!-- ============================================================ -->
 
     <LinearLayout
@@ -404,36 +406,19 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <Button
-            android:id="@+id/btn_start_screensaver"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="▶  PREVIEW SCREENSAVER"
-            android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:textSize="11sp"
-            android:background="@drawable/bg_tv_button"
-            android:focusable="true"
-            android:minHeight="0dp"
-            android:minWidth="0dp"
-            android:padding="2dp"
-            android:layout_marginEnd="4dp" />
-
-        <Button
             android:id="@+id/btn_apply_timeouts"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:text="✓  SAVE CHANGES"
             android:textColor="#777F89"
             android:textStyle="bold"
             android:textSize="11sp"
-            android:background="@drawable/bg_save_disabled"
+            android:background="@drawable/bg_tv_button_focus"
             android:focusable="true"
+            android:focusableInTouchMode="true"
             android:minHeight="0dp"
             android:minWidth="0dp"
-            android:padding="2dp"
-            android:layout_marginStart="4dp" />
+            android:padding="2dp" />
 
     </LinearLayout>
 
@@ -491,9 +476,6 @@
 
     <!-- ============================================================ -->
     <!-- APP LIST                                                      -->
-    <!--                                                             -->
-    <!-- This takes ALL remaining vertical space, giving room for at   -->
-    <!-- least five screensaver entries on the TV display.             -->
     <!-- ============================================================ -->
 
     <ScrollView
@@ -504,6 +486,7 @@
         android:padding="4dp"
         android:layout_marginTop="6dp"
         android:fillViewport="true"
+        android:focusable="false"
         app:layout_constraintTop_toBottomOf="@id/screensaver_header"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -513,7 +496,8 @@
             android:id="@+id/rg_daydream_apps"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:orientation="vertical"
+            android:focusable="false" />
 
     </ScrollView>
 
