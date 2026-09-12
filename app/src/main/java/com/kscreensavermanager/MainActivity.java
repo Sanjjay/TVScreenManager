@@ -1026,6 +1026,5 @@ public class MainActivity extends Activity {
         }
 
         updateUi();
-        }
     }
 }
