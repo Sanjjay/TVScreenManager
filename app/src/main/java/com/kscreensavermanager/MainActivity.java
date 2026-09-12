@@ -7,7 +7,7 @@
  * License, or (at your option) any later version.
  */
 
-package com.kscreensavermanager;
+package com.tvscreensavermanager;
 
 import android.app.Activity;
 import android.content.Intent;
