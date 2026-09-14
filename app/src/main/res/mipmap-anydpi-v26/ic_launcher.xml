@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
-    <background android:drawable="@color/ic_launcher_background" />
-    <foreground android:drawable="@drawable/settings_system_daydream_24" />
-    <monochrome android:drawable="@drawable/settings_system_daydream_24" />
-</adaptive-icon>
