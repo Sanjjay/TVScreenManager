@@ -9,7 +9,7 @@
 * **Screen-Off Timeouts:** Easily adjust how long your TV stays idle before the screen turns off completely.
 * **Sleep Timeouts:** Customize exactly when your device goes into a deep sleep mode to save energy.
 * **Custom Daydream Selection:** Set *any* installed screensaver app (Daydream) as your default, even if your TV's system settings try to block or hide it.
-* * **Custom Keyboard Selection:** Set *any* installed keyboard app as your default, even if your TV's system settings try to block or hide it.
+* **Custom Keyboard Selection:** Set *any* installed keyboard app as your default, even if your TV's system settings try to block or hide it.
 * **Fire TV & Google TV Compatible:** Works seamlessly across various TV operating systems that traditionally restrict screensaver customization.
 
 ---
