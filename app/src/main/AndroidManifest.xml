@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Required for changing system/secure timeout settings.
+         It must be granted manually via ADB. -->
+    <uses-permission
+        android:name="android.permission.WRITE_SECURE_SETTINGS" />
+
+    <!-- Allow installation on TV devices -->
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="false" />
+
+    <!-- Explicitly declares this is a television-compatible app -->
+    <uses-feature
+        android:name="android.hardware.type.television"
+        android:required="false" />
+
+    <!-- Don't require a touchscreen -->
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+
+    <!-- Allows discovery of installed DreamService screensavers and keyboard/input-method apps. -->
+    <queries>
+
+        <!-- Screensaver discovery -->
+        <intent>
+            <action android:name="android.service.dreams.DreamService" />
+        </intent>
+
+        <!-- Keyboard / Input Method discovery -->
+        <intent>
+            <action android:name="android.view.InputMethod" />
+        </intent>
+
+    </queries>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/tv_icon_background"
+        android:banner="@drawable/tv_banner_background"
+        android:label="TV Screen Manager"
+        android:theme="@style/Theme.Leanback">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:screenOrientation="landscape">
+
+            <intent-filter>
+
+                <action android:name="android.intent.action.MAIN" />
+
+                <!-- Normal Android launcher -->
+                <category android:name="android.intent.category.LAUNCHER" />
+
+                <!-- Android TV / Google TV launcher -->
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+
+            </intent-filter>
+
+        </activity>
+
+    </application>
+
+</manifest>

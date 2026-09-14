@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Same background as the app -->
+    <item>
+        <shape>
+            <solid android:color="#0B1018" />
+        </shape>
+    </item>
+
+    <!-- Your transparent banner -->
+    <item>
+        <bitmap
+            android:src="@drawable/tv_banner"
+            android:gravity="center" />
+    </item>
+
+</layer-list>
