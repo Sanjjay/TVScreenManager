@@ -2,18 +2,17 @@
 
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Same background as the app -->
+    <!-- Solid Teal App Background -->
     <item>
-        <shape>
+        <shape android:shape="rectangle">
             <solid android:color="#22505b" />
         </shape>
     </item>
 
-    <!-- Your transparent banner -->
+    <!-- Transparent PNG banner -->
     <item>
         <bitmap
-            android:src="@drawable/tv_banner"
-            android:gravity="fill" />
+            android:src="@drawable/tv_banner" />
     </item>
 
 </layer-list>
