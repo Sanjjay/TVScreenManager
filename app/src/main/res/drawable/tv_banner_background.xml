@@ -5,7 +5,7 @@
     <!-- Same background as the app -->
     <item>
         <shape>
-            <solid android:color="#0B1018" />
+            <solid android:color="#22505b" />
         </shape>
     </item>
 
