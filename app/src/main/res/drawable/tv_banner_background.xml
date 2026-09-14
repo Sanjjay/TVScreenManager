@@ -13,7 +13,7 @@
     <item>
         <bitmap
             android:src="@drawable/tv_banner"
-            android:gravity="center" />
+            android:gravity="fill" />
     </item>
 
 </layer-list>
