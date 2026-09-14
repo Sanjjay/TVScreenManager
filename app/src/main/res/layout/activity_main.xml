@@ -41,7 +41,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Manage your keyboard, screensaver and power settings"
+                android:text="Manage your screen_off_timeout, sleep_timeout, screensaver and keyboard settings"
                 android:textColor="#8995A5"
                 android:textSize="13sp"
                 android:layout_marginTop="2dp" />
@@ -216,7 +216,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SCREENSAVER"
+                android:text="SCREEN_OFF_TIMEOUT"
                 android:textColor="#F5F7FA"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -331,7 +331,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SYSTEM SLEEP"
+                android:text="SLEEP_TIMEOUT"
                 android:textColor="#F5F7FA"
                 android:textSize="14sp"
                 android:textStyle="bold" />
@@ -458,7 +458,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="SCREENSAVER"
+                android:text="SCREENSAVER APPS"
                 android:textColor="#F5F7FA"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -478,7 +478,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Choose which screensaver to use"
+                android:text="Choose which screensaver app to use"
                 android:textColor="#8995A5"
                 android:textSize="10sp"
                 android:layout_marginTop="1dp" />
@@ -498,7 +498,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="KEYBOARD"
+                android:text="KEYBOARD APPS"
                 android:textColor="#F5F7FA"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -518,7 +518,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Choose which keyboard to use"
+                android:text="Choose which keyboard app to use"
                 android:textColor="#8995A5"
                 android:textSize="10sp"
                 android:layout_marginTop="1dp" />
@@ -627,5 +627,23 @@
             android:padding="2dp" />
 
     </LinearLayout>
+
+    <!-- ============================================================ -->
+    <!-- AGPLv3 LICENSE NOTICE                                        -->
+    <!-- ============================================================ -->
+    <TextView
+        android:id="@+id/tv_agpl_footer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        android:text="Open-source under GNU AGPLv3. Source: https://x.gd/tvscreenmanager"
+        android:textColor="#55FFFFFF"
+        android:textSize="9sp"
+        android:focusable="false"
+        android:clickable="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
