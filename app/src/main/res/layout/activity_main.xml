@@ -128,7 +128,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Run this ADB command to enable system settings control."
+                android:text="Run this ADB command to enable system settings control and restart app."
                 android:textColor="#B7C0CC"
                 android:textSize="11sp"
                 android:layout_marginTop="1dp" />
@@ -176,7 +176,7 @@
             android:id="@+id/tv_access_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="● SYSTEM ACCESS"
+            android:text="● SYSTEM ACCESS GRANTED"
             android:textColor="#65D6CC"
             android:textSize="10sp"
             android:textStyle="bold" />
