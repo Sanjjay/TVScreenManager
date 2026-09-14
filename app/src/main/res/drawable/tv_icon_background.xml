@@ -11,7 +11,7 @@
     <item>
         <bitmap
             android:src="@drawable/tv_icon"
-            android:gravity="center" />
+            android:gravity="fill" />
     </item>
 
 </layer-list>
