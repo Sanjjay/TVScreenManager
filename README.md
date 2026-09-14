@@ -1,14 +1,15 @@
-# TVScreensaverManager 📺
+# TVScreenManager 📺
 
-**TVScreensaverManager** is a utility tool designed for Android TV, Google TV, and Amazon Fire TV devices. It gives you full control over your TV's display habits, allowing you to bypass strict system limitations and customize your screen's behavior exactly how you want it.
+**TVScreenManager** is a utility tool designed for Android TV, Google TV, and Amazon Fire TV devices. It gives you full control over your TV's display habits, allowing you to bypass strict system limitations and customize your screen's behavior exactly how you want it.
 
 ---
 
 ## ✨ Features
 
-* **Custom Daydream Selection:** Set *any* installed screensaver app (Daydream) as your default, even if your TV's system settings try to block or hide it.
 * **Screen-Off Timeouts:** Easily adjust how long your TV stays idle before the screen turns off completely.
 * **Sleep Timeouts:** Customize exactly when your device goes into a deep sleep mode to save energy.
+* **Custom Daydream Selection:** Set *any* installed screensaver app (Daydream) as your default, even if your TV's system settings try to block or hide it.
+* * **Custom Keyboard Selection:** Set *any* installed keyboard app as your default, even if your TV's system settings try to block or hide it.
 * **Fire TV & Google TV Compatible:** Works seamlessly across various TV operating systems that traditionally restrict screensaver customization.
 
 ---
@@ -38,10 +39,10 @@ adb devices
 *(Note: A popup will appear on your TV screen asking to allow USB/ADB debugging. Click **Allow** or **Always Allow**).*
 
 ### Step 3: Grant Secure Permissions
-Copy and paste the exact command below into your computer's terminal to give **TVScreensaverManager** the power to change your screensaver:
+Copy and paste the exact command below into your computer's terminal to give **TVScreenManager** the power to change your screensaver and keyboard:
 
 ```bash
-adb shell pm grant com.tvscreensavermanager android.permission.WRITE_SECURE_SETTINGS
+adb shell pm grant com.tvscreenmanager android.permission.WRITE_SECURE_SETTINGS
 ```
 ---
 
@@ -49,7 +50,7 @@ adb shell pm grant com.tvscreensavermanager android.permission.WRITE_SECURE_SETT
 
 Android TVs use "Secure Settings" to control what happens when the device is idle. Applications cannot change these settings by default to prevent malicious apps from taking over your screen. 
 
-By running the ADB command above, you unlock the doors for **TVScreensaverManager** to safely talk to the Android system system and write your preferred choices directly into the TV's configuration file.
+By running the ADB command above, you unlock the doors for **TVScreenManager** to safely talk to the Android system system and write your preferred choices directly into the TV's configuration file.
 
 ---
 
