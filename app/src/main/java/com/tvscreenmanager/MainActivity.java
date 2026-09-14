@@ -305,7 +305,7 @@ public class MainActivity extends Activity {
             if (tvAccessStatus != null) {
 
                 tvAccessStatus.setText(
-                        "● SYSTEM ACCESS"
+                        "● SYSTEM ACCESS GRANTED"
                 );
 
                 tvAccessStatus.setTextColor(
@@ -327,7 +327,7 @@ public class MainActivity extends Activity {
             if (tvAccessStatus != null) {
 
                 tvAccessStatus.setText(
-                        "● ACCESS REQUIRED"
+                        "● SYSTEM ACCESS REQUIRED"
                 );
 
                 tvAccessStatus.setTextColor(
