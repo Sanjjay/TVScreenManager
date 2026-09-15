@@ -27,12 +27,14 @@ Because changing screensaver and timeout settings requires deeper system access,
 
 You only need to do this **once** using a computer and an ADB (Android Debug Bridge) command.
 
-## 📋 Prerequisite: Install ADB
+📋 Prerequisite: Install ADB
 You must have ADB installed on your computer before running commands. 
 
 * **Windows:** Download [Platform-Tools](https://android.com), extract the zip, and open Command Prompt inside that folder.
 * **Mac:** Run `brew install android-platform-tools` in Terminal.
 * **Linux:** Run `sudo apt install adb` (Ubuntu) or `sudo dnf install android-tools` (Fedora).
+
+##
 
 ### Step 1: Enable ADB Debugging on your TV
 1. Open your TV **Settings** and go to **System** > **About**.
