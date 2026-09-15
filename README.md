@@ -30,7 +30,7 @@ You only need to do this **once** using a computer and an ADB (Android Debug Bri
 📋 Prerequisite: Install ADB
 You must have ADB installed on your computer before running commands. 
 
-* **Windows:** Download [Platform-Tools]([https://developer.android.com/tools/releases/platform-tools#downloads]), extract the zip, and open Command Prompt inside that folder.
+* **Windows:** Download [Platform-Tools](https://dl.google.com/android/repository/platform-tools-latest-windows.zip), extract the zip, and open Command Prompt inside that folder.
 * **Mac:** Run `brew install android-platform-tools` in Terminal.
 * **Linux:** Run `sudo apt install adb` (Ubuntu) or `sudo dnf install android-tools` (Fedora).
 
