@@ -17,13 +17,13 @@
 * **Sleep Timeouts:** Customize exactly when your device goes into a deep sleep mode to save energy.
 * **Custom Daydream Selection:** Set *any* installed screensaver app (Daydream) as your default, even if your TV's system settings try to block or hide it.
 * **Custom Keyboard Selection:** Set *any* installed keyboard app as your default, even if your TV's system settings try to block or hide it.
-* **Fire TV & Google TV Compatible:** Works seamlessly across various TV operating systems that traditionally restrict screensaver customization.
+* **Fire TV & Google TV Compatible:** Works seamlessly across various TV operating systems that traditionally restrict customization.
 
 ---
 
 ## 🚀 Setup Instructions
 
-Because changing screensaver and timeout settings requires deeper system access, Android requires you to grant a special permission called `WRITE_SECURE_SETTINGS`. 
+Because changing keyboard, screensaver and timeout settings requires deeper system access, Android requires you to grant a special permission called `WRITE_SECURE_SETTINGS`. 
 
 You only need to do this **once** using a computer and an ADB (Android Debug Bridge) command.
 
@@ -42,7 +42,7 @@ You must have ADB installed on your computer before running commands.
 3. Go back to the previous menu, open **Developer Options**, and turn on **ADB Debugging**.
 4. Note down your TV's **IP Address** (usually found in Settings > Network & Internet).
 
-### Step 2: Connect via your Computer
+### Step 2: Connect via your Computer, both devices has to be on the same wireless network
 Open a Terminal (Mac/Linux) or Command Prompt (Windows) on your computer and run the following commands to connect to your TV:
 
 ```bash
