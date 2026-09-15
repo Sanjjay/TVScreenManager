@@ -3,6 +3,12 @@
 **TVScreenManager** is a utility tool designed for Android TV, Google TV, and Amazon Fire TV devices. It gives you full control over your TV's display habits, allowing you to bypass strict system limitations and customize your screen's behavior exactly how you want it.
 
 ---
+## 📸 Screenshots
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/f4a29f24-9640-4a7a-baa5-3b8f46571b08" width="700" alt="screenshot" />
+</p>
+---
 
 ## ✨ Features
 
