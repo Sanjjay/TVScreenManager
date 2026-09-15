@@ -38,8 +38,8 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/tv_icon_background"
-        android:banner="@drawable/tv_banner_background"
+        android:icon="@drawable/tv_icon"
+        android:banner="@drawable/tv_banner"
         android:label="TV Screen Manager"
         android:theme="@style/Theme.Leanback">
 
