@@ -1,8 +1,8 @@
+<center>
 <kbd>
-<p align="center">
 <img src="https://github.com/user-attachments/assets/fe4d8a63-041a-4b79-93c6-05bf974d4639" width="320" alt="tv_banner" />
-</p>
 </kbd>
+<center>
 
 # TVScreenManager 📺
 
