@@ -50,18 +50,9 @@ public class MainActivity extends Activity {
 
     private TextView tvOffCurrent;
     private TextView tvOffPending;
-
     private TextView tvSleepCurrent;
     private TextView tvSleepPending;
-
-    /*
-     * Shows the name of the screensaver currently applied to the device.
-     */
     private TextView tvCurrentScreensaver;
-
-    /*
-     * Shows the name of the keyboard currently applied to the device.
-     */
     private TextView tvCurrentKeyboard;
 
     private Button btnApply;
@@ -76,29 +67,17 @@ public class MainActivity extends Activity {
 
     private boolean hasSecurePermission = false;
 
-    // Current values actually stored on the device.
     private int currentOffMs = -1;
     private int currentSleepMs = -1;
 
-    // Values selected by the user but not necessarily saved yet.
     private int pendingOffMs = -1;
     private int pendingSleepMs = -1;
 
     private String currentDaydreamComponent = "";
     private String pendingDaydreamComponent = "";
 
-    /*
-     * Current keyboard ID.
-     *
-     * Example:
-     *
-     * com.example.keyboard/.KeyboardService
-     */
     private String currentKeyboardId = "";
 
-    /*
-     * Keyboard selected by the user but not necessarily saved yet.
-     */
     private String pendingKeyboardId = "";
 
     private TvPlatform.Type platform;
@@ -139,9 +118,6 @@ public class MainActivity extends Activity {
 
         updatePlatformHeader();
 
-        /*
-         * WRITE_SECURE_SETTINGS permission check.
-         */
         checkAdbPermission();
 
         loadCurrentSettings();
@@ -279,14 +255,6 @@ public class MainActivity extends Activity {
                             1
                     );
 
-            /*
-             * A write is intentionally attempted here.
-             *
-             * Reading Secure Settings alone does not prove that
-             * WRITE_SECURE_SETTINGS is available.
-             *
-             * This is deliberately kept from the original code.
-             */
             Settings.Secure.putInt(
                     getContentResolver(),
                     "screensaver_enabled",
@@ -977,9 +945,6 @@ public class MainActivity extends Activity {
         } catch (Exception ignored) {
         }
 
-        /*
-         * Fallback to the package name.
-         */
         String[] parts =
                 keyboardId.split("/", 2);
 
@@ -1035,13 +1000,6 @@ public class MainActivity extends Activity {
         Button button =
                 (Button) view;
 
-        /*
-         * Do NOT replace the drawable here.
-         *
-         * bg_tv_button.xml is a selector and needs to remain attached
-         * so state_focused continues to produce the teal TV-navigation
-         * border.
-         */
         if (selected) {
 
             button.setBackgroundTintList(
@@ -1178,10 +1136,6 @@ public class MainActivity extends Activity {
                         pendingOffMs
                 );
 
-                /*
-                 * Some TV firmware uses this additional value.
-                 * Not all devices expose it, so failure is ignored.
-                 */
                 try {
 
                     Settings.Secure.putInt(
@@ -1240,13 +1194,6 @@ public class MainActivity extends Activity {
 
                 if (!pendingKeyboardId.isEmpty()) {
 
-                    /*
-                     * WRITE_SECURE_SETTINGS is already checked by
-                     * checkAdbPermission().
-                     *
-                     * This writes the selected IME directly as the
-                     * current/default keyboard.
-                     */
                     Settings.Secure.putString(
                             getContentResolver(),
                             Settings.Secure.DEFAULT_INPUT_METHOD,
@@ -1268,10 +1215,6 @@ public class MainActivity extends Activity {
             currentDaydreamComponent =
                     pendingDaydreamComponent;
 
-            /*
-             * Read the actual keyboard back from the device rather
-             * than simply assuming the write succeeded.
-             */
             String actualKeyboardId =
                     getCurrentKeyboardId();
 
@@ -1296,9 +1239,6 @@ public class MainActivity extends Activity {
 
         } catch (SecurityException e) {
 
-            /*
-             * Keep the original permission behaviour.
-             */
             checkAdbPermission();
 
             showPermissionToast();
@@ -1578,12 +1518,6 @@ public class MainActivity extends Activity {
                 )
         );
 
-        /*
-         * Small amount of internal breathing room.
-         *
-         * This keeps the rows from being tightly stacked without
-         * creating large gaps when many apps are present.
-         */
         row.setPadding(
                 14,
                 9,
@@ -1593,17 +1527,10 @@ public class MainActivity extends Activity {
 
         row.setMinHeight(58);
 
-        /*
-         * Required for TV remote navigation.
-         */
         row.setFocusable(true);
 
         row.setFocusableInTouchMode(true);
 
-        /*
-         * Same drawable is deliberately used for both screensaver
-         * and keyboard rows.
-         */
         row.setBackgroundResource(
                 R.drawable.bg_daydream_row
         );
@@ -1673,10 +1600,6 @@ public class MainActivity extends Activity {
 
             row.setChecked(selected);
 
-            /*
-             * Do not call setBackgroundColor here.
-             * That would destroy bg_daydream_row.xml.
-             */
             if (row.getBackground() == null) {
 
                 row.setBackgroundResource(
@@ -1722,10 +1645,6 @@ public class MainActivity extends Activity {
 
             row.setChecked(selected);
 
-            /*
-             * Preserve bg_daydream_row.xml so the same teal TV
-             * navigation outline works for keyboards.
-             */
             if (row.getBackground() == null) {
 
                 row.setBackgroundResource(
@@ -1824,35 +1743,20 @@ public class MainActivity extends Activity {
             return;
         }
 
-        /*
-         * Remember whether the user has unsaved changes before
-         * refreshing permission state.
-         */
         boolean hadChanges =
                 hasChanges();
 
         boolean previouslyHadPermission =
                 hasSecurePermission;
 
-        /*
-         * Keep the original permission check.
-         */
         checkAdbPermission();
 
-        /*
-         * If ADB permission has just been granted, reload the
-         * previously unavailable secure settings.
-         */
         if (!hadChanges ||
                 (!previouslyHadPermission &&
                         hasSecurePermission)) {
 
             loadCurrentSettings();
 
-            /*
-             * Re-discover screensavers and keyboards because access
-             * to secure settings is now available.
-             */
             discoverAndPopulateDaydreams();
 
             discoverAndPopulateKeyboards();
